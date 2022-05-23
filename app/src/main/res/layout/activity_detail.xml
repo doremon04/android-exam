@@ -22,9 +22,10 @@
         <Spinner
             android:id="@+id/subjects_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:entries="@array/subjects"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Giới tính"
+                android:paddingLeft="2dp"
                 android:textSize="20sp" />
 
             <RadioGroup
@@ -83,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="SĐT"
+            android:inputType="number"
             android:textSize="20sp" />
     </LinearLayout>
 
