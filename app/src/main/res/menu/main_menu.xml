@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homePage" android:title="Trang chủ"/>
+    <item android:id="@+id/signupPage" android:title="Đăng kí học"/>
+    <item android:id="@+id/managePage" android:title="Quản lý lớp"/>
+    <item android:id="@+id/search" android:title="Tìm kiếm lớp"/>
+</menu>

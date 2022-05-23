@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidExam</string>
+    <string-array name="subjects">
+        <item>Java</item>
+        <item>PHP</item>
+        <item>C#</item>
+        <item>HTML</item>
+        <item>Go</item>
+    </string-array>
 </resources>
