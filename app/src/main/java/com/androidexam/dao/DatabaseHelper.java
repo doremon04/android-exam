@@ -21,22 +21,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "    id       INTEGER       PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name STRING            NOT NULL,\n" +
                 "    className STRING        NOT NULL,\n" +
+                "    birthday DATE        NOT NULL,\n" +
                 "    gender BIT        NOT NULL,\n" +
                 "    phone    VARCHAR (11),\n" +
                 "    email    VARCHAR (255) \n" +
                 ");\n";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, gender, phone, email) VALUES ('Ngọc Thị Trinh', 'C1905M', 0, '0123456789', 'ngoctrinh@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Ngọc Thị Trinh', 'C1905M', '2020-12-12', 0, '0123456789', 'ngoctrinh@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, gender, phone, email) VALUES ('Trương Vô Kỵ', 'C2012M', 0, '0789456132', 'voky@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Trương Vô Kỵ', 'C2012M', '2020-12-12', 1, '0789456132', 'voky@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, gender, phone, email) VALUES ('Hoàng Dược Sư', 'C2202M', 0, '0456123789', 'duocsu@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Hoàng Dược Sư', 'C2202M', '2020-12-12', 0, '0456123789', 'duocsu@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, gender, phone, email) VALUES ('Quách Văn Tĩnh', 'C2005M', 0, '0456145679', 'quachtinh@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Quách Văn Tĩnh', 'C2005M', '2020-12-12', 1, '0456145679', 'quachtinh@gmail.com')";
         db.execSQL(sql);
     }
 

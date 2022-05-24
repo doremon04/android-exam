@@ -32,17 +32,17 @@ public class StudentDAOImpl implements IStudentDAO {
             @SuppressLint("Range") String name = c.getString(c.getColumnIndex("name"));
             @SuppressLint("Range") String className = c.getString(c.getColumnIndex("className"));
             @SuppressLint("Range") boolean gender = c.getInt(c.getColumnIndex("gender")) > 0;
-            @SuppressLint("Range") String birthdayStr = c.getString(c.getColumnIndex("birthday"));
+//            @SuppressLint("Range") String birthdayStr = c.getString(c.getColumnIndex("birthday"));
             @SuppressLint("Range") String phone = c.getString(c.getColumnIndex("phone"));
             @SuppressLint("Range") String email = c.getString(c.getColumnIndex("email"));
 
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date birthday = null;
-            try {
-                birthday = sdf.parse(birthdayStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                birthday = sdf.parse(birthdayStr);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
 
             Student s = new Student(id, name, className, gender, phone, birthday, email);
             list.add(s);
