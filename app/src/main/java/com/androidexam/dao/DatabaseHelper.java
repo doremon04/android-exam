@@ -28,16 +28,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ");\n";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Ngọc Thị Trinh', 'C1905M', '2020-12-12', 0, '0123456789', 'ngoctrinh@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Ngọc Thị Trinh', 'Java', '2020-12-12', 0, '0123456789', 'ngoctrinh@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Trương Vô Kỵ', 'C2012M', '2020-12-12', 1, '0789456132', 'voky@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Trương Vô Kỵ', 'PHP', '2020-12-12', 1, '0789456132', 'voky@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Hoàng Dược Sư', 'C2202M', '2020-12-12', 0, '0456123789', 'duocsu@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Hoàng Dược Sư', 'Android', '2020-12-12', 0, '0456123789', 'duocsu@gmail.com')";
         db.execSQL(sql);
 
-        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Quách Văn Tĩnh', 'C2005M', '2020-12-12', 1, '0456145679', 'quachtinh@gmail.com')";
+        sql = "INSERT INTO tblStudent(name, className, birthday, gender, phone, email) VALUES ('Quách Văn Tĩnh', 'C#', '2020-12-12', 1, '0456145679', 'quachtinh@gmail.com')";
         db.execSQL(sql);
     }
 
