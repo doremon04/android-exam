@@ -1,8 +1,6 @@
 package com.androidexam;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,16 +26,14 @@ public class DetailActivity extends AppCompatActivity {
 
     public void openDatePicker(View view) {
         Calendar calendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year, month, day);
-                EditText edt = (EditText) view;
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-                edt.setText(fmt.format(calendar.getTime()));
-            }
+        DatePickerDialog.OnDateSetListener listener = (datePicker, year, month, day) -> {
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(year, month, day);
+            EditText edt = (EditText) view;
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            edt.setText(fmt.format(calendar1.getTime()));
         };
+
         DatePickerDialog dpd = new DatePickerDialog(DetailActivity.this, listener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         dpd.show();
     }
@@ -45,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
