@@ -109,6 +109,8 @@ public class DetailActivity extends AppCompatActivity {
         binding.edtPhone.setText(c.getPhone());
         binding.edtEmail.setText(c.getEmail());
 
+        System.out.println("Student birthday: " + c.getBirthday());
+
         try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String birthday = sdf.format(c.getBirthday());
