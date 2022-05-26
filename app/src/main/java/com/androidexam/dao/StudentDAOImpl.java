@@ -82,7 +82,10 @@ public class StudentDAOImpl implements IStudentDAO {
         cv.put("name", c.getName());
         cv.put("className", c.getClassName());
         cv.put("gender", c.getGender());
-        cv.put("birthday", String.valueOf(c.getBirthday()));
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        cv.put("birthday", sdf.format(c.getBirthday()));
+
         cv.put("phone", c.getPhone());
         cv.put("email", c.getEmail());
         long newId = mDB.insert("tblStudent", null, cv);
@@ -95,7 +98,10 @@ public class StudentDAOImpl implements IStudentDAO {
         cv.put("name", c.getName());
         cv.put("className", c.getClassName());
         cv.put("gender", c.getGender());
-        cv.put("birthday", String.valueOf(c.getBirthday()));
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        cv.put("birthday", sdf.format(c.getBirthday()));
+
         cv.put("phone", c.getPhone());
         cv.put("email", c.getEmail());
         long newId = mDB.update("tblStudent", cv, " id = " + c.getId(), null);
