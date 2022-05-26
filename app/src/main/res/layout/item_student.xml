@@ -14,14 +14,14 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3.5"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/itemClassName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Java"
                 android:textSize="20sp" />
@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="8.5"
             android:orientation="vertical">
 
             <TextView
@@ -56,20 +56,20 @@
                     android:src="@drawable/ic_male" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/itemPhone"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0123 456 789"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/itemEmail"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="ahihi@gmail.com"
                         android:textSize="20sp" />
