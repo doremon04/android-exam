@@ -82,7 +82,7 @@ public class StudentDAOImpl implements IStudentDAO {
         cv.put("name", c.getName());
         cv.put("className", c.getClassName());
         cv.put("gender", c.getGender());
-        cv.put("birthday", c.getBirthday().toString());
+        cv.put("birthday", String.valueOf(c.getBirthday()));
         cv.put("phone", c.getPhone());
         cv.put("email", c.getEmail());
         long newId = mDB.insert("tblStudent", null, cv);
@@ -91,12 +91,11 @@ public class StudentDAOImpl implements IStudentDAO {
 
     @Override
     public boolean update(Student c) {
-
         ContentValues cv = new ContentValues();
         cv.put("name", c.getName());
         cv.put("className", c.getClassName());
         cv.put("gender", c.getGender());
-        cv.put("birthday", c.getBirthday().toString());
+        cv.put("birthday", String.valueOf(c.getBirthday()));
         cv.put("phone", c.getPhone());
         cv.put("email", c.getEmail());
         long newId = mDB.update("tblStudent", cv, " id = " + c.getId(), null);

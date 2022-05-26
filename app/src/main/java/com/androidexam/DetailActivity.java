@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -86,17 +87,42 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public int setSpinText(Spinner spin, String text)
+    {
+        for(int i= 0; i < spin.getAdapter().getCount(); i++)
+        {
+            if(spin.getAdapter().getItem(i).toString().contains(text))
+            {
+               return i;
+            }
+        }
+
+        return 0;
+    }
+
     private void loadStudent(int idS) {
         IStudentDAO studentDAO = new StudentDAOImpl(this);
         Student c = studentDAO.selectById(idS);
         mID = c.getId();
 
         binding.edtName.setText(c.getName());
-//        binding.subjectsSpinner.s(c.getClassName());
+
+        int index = setSpinText(binding.subjectsSpinner, c.getClassName());
+        binding.subjectsSpinner.setSelection(index);
         binding.edtPhone.setText(c.getPhone());
         binding.edtEmail.setText(c.getEmail());
-        binding.edtBirthday.setText(c.getBirthday().toString());
-        binding.radMale.setChecked(c.getGender());
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String birthday = sdf.format(c.getBirthday());
+        binding.edtBirthday.setText(birthday);
+
+        if (c.getGender()) {
+            binding.radMale.setChecked(true);
+            binding.radFemale.setChecked(false);
+        } else {
+            binding.radFemale.setChecked(true);
+            binding.radMale.setChecked(false);
+        }
     }
 
     private void create() {
