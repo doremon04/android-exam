@@ -1,6 +1,7 @@
 package com.androidexam;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
     private ActivityDetailBinding binding;
-    private int mID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,6 @@ public class DetailActivity extends AppCompatActivity {
 
         if (idS > 0) {
             loadStudent(idS);
-            binding.btnAdd.setEnabled(false);
-            binding.btnEdit.setOnClickListener(view -> update());
-            binding.btnEdit.setEnabled(true);
-            binding.btnDelete.setEnabled(true);
             return;
         }
 
@@ -87,13 +83,10 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public int setSpinText(Spinner spin, String text)
-    {
-        for(int i= 0; i < spin.getAdapter().getCount(); i++)
-        {
-            if(spin.getAdapter().getItem(i).toString().contains(text))
-            {
-               return i;
+    public int setSpinText(Spinner spin, String text) {
+        for (int i = 0; i < spin.getAdapter().getCount(); i++) {
+            if (spin.getAdapter().getItem(i).toString().contains(text)) {
+                return i;
             }
         }
 
@@ -103,7 +96,6 @@ public class DetailActivity extends AppCompatActivity {
     private void loadStudent(int idS) {
         IStudentDAO studentDAO = new StudentDAOImpl(this);
         Student c = studentDAO.selectById(idS);
-        mID = c.getId();
 
         binding.edtName.setText(c.getName());
 
@@ -112,9 +104,13 @@ public class DetailActivity extends AppCompatActivity {
         binding.edtPhone.setText(c.getPhone());
         binding.edtEmail.setText(c.getEmail());
 
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String birthday = sdf.format(c.getBirthday());
-        binding.edtBirthday.setText(birthday);
+        try {
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String birthday = sdf.format(c.getBirthday());
+            binding.edtBirthday.setText(birthday);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (c.getGender()) {
             binding.radMale.setChecked(true);
@@ -123,6 +119,14 @@ public class DetailActivity extends AppCompatActivity {
             binding.radFemale.setChecked(true);
             binding.radMale.setChecked(false);
         }
+
+        binding.btnAdd.setEnabled(false);
+
+        binding.btnEdit.setOnClickListener(view -> update(c.getId()));
+        binding.btnEdit.setEnabled(true);
+
+        binding.btnDelete.setOnClickListener(view -> delete(c.getId()));
+        binding.btnDelete.setEnabled(true);
     }
 
     private void create() {
@@ -155,32 +159,88 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    private void update() {
-        String name = binding.edtName.getText().toString();
-        String phone = binding.edtPhone.getText().toString();
-        String email = binding.edtEmail.getText().toString();
-        String className = binding.subjectsSpinner.getSelectedItem().toString();
-        String birthdayStr = binding.edtBirthday.getText().toString();
-        boolean gender = binding.radMale.isChecked();
+    private void update(int id) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
 
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthday = null;
-        try {
-            birthday = sdf.parse(birthdayStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // Set a title for alert dialog
+        builder.setTitle("Select your answer.");
 
-        Student s = new Student(mID, name, className, gender, phone, birthday, email);
-        IStudentDAO studentDAO = new StudentDAOImpl(this);
-        boolean result = studentDAO.insert(s);
-        if (result) {
-            Toast.makeText(this, "Update successfully", Toast.LENGTH_SHORT).show();
+        // Ask the final question
+        builder.setMessage("Are you sure to edit?");
 
-            // go to main activity
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else
-            Toast.makeText(this, "Update error", Toast.LENGTH_SHORT).show();
+        // Set the alert dialog yes button click listener
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // Do something when user clicked the Yes button
+            String name = binding.edtName.getText().toString();
+            String phone = binding.edtPhone.getText().toString();
+            String email = binding.edtEmail.getText().toString();
+            String className = binding.subjectsSpinner.getSelectedItem().toString();
+            String birthdayStr = binding.edtBirthday.getText().toString();
+            boolean gender = binding.radMale.isChecked();
+
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthday = null;
+            try {
+                birthday = sdf.parse(birthdayStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Student s = new Student(id, name, className, gender, phone, birthday, email);
+            IStudentDAO studentDAO = new StudentDAOImpl(DetailActivity.this);
+            boolean result = studentDAO.update(s);
+            if (result) {
+                Toast.makeText(DetailActivity.this, "Update successfully", Toast.LENGTH_SHORT).show();
+
+                // go to main activity
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            } else
+                Toast.makeText(DetailActivity.this, "Update error", Toast.LENGTH_SHORT).show();
+        });
+
+        // Set the alert dialog no button click listener
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Do something when No button clicked
+        });
+
+        AlertDialog dialog = builder.create();
+        // Display the alert dialog on interface
+        dialog.show();
+    }
+
+    private void delete(int id) {
+        // Build an AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
+
+        // Set a title for alert dialog
+        builder.setTitle("Select your answer.");
+
+        // Ask the final question
+        builder.setMessage("Are you sure to delete?");
+
+        // Set the alert dialog yes button click listener
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            IStudentDAO studentDAO = new StudentDAOImpl(DetailActivity.this);
+            boolean result = studentDAO.delete(id);
+            if (result) {
+                Toast.makeText(DetailActivity.this, "Delete successfully", Toast.LENGTH_SHORT).show();
+
+                // go to main activity
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            } else
+                Toast.makeText(DetailActivity.this, "Delete error", Toast.LENGTH_SHORT).show();
+        });
+
+        // Set the alert dialog no button click listener
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Do something when No button clicked
+        });
+
+        AlertDialog dialog = builder.create();
+        // Display the alert dialog on interface
+        dialog.show();
     }
 }
