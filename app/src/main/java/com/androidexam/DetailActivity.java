@@ -33,7 +33,12 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        int idS = getIntent().getExtras().getInt("ids");
+        int idS = 0;
+        try {
+            idS = getIntent().getExtras().getInt("ids");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (idS > 0) {
             loadStudent(idS);
