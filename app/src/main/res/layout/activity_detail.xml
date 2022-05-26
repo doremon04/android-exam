@@ -12,14 +12,14 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edtFullName"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên sinh viên"
             android:textSize="20sp" />
 
         <Spinner
-            android:id="@+id/subjects_spinner"
+            android:id="@+id/subjectsSpinner"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:entries="@array/subjects"
@@ -53,6 +53,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
+                    android:id="@+id/radFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nữ"

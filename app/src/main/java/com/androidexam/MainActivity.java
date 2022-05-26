@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         binding.listStudents.setOnItemClickListener((adapterView, view, pos, l) -> {
             Intent intent = new Intent(this, DetailActivity.class);
             int id = lst.get(pos).getId();
-            intent.putExtra("idb", id);
+            intent.putExtra("ids", id);
             startActivity(intent);
         });
 
